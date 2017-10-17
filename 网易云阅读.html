@@ -1,0 +1,1740 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>网易云阅读</title>
+
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+		text-decoration: none;
+		border: none;
+		font-weight: normal;
+	}
+	.m-topbar{background: #fafafa;border-bottom: 1px solid #dcdcdc;}
+	.m-topbar .inner{width: 980px;height: 35px;margin: 0 auto;position: relative;
+	}
+	.m-topbar .inner li{
+		float: left;
+		color: #999;
+		font-size: 12px;
+		line-height: 35px;
+	}
+	.m-topbar .inner li span{margin: 0 12px;}
+	.m-topbar .inner li a{color: #888888;display: block;}
+	.m-topbar .inner .ul1{float: left}
+	.m-topbar .inner .ul2{float: right}
+	.m-topbar .inner .ul2 span{font-size: 12px;line-height: 35px;}
+	.m-topbar .inner .ul2 .dl a{padding-right: 12px;background: url(pic/logo.png) no-repeat 28px -307px}
+	.m-topbar .inner .ul2 .dl .dl_fuzhu{
+		position: absolute;
+		top:30px;
+		left: 840px;
+		width: 40px;
+		height: 15px;
+		opacity:0
+	}
+	.m-topbar .inner .m-loginops{
+		position: absolute;
+		top:42px;
+		left: 775px;
+		border: #cdcdcd solid 1px;
+		border-radius: 3px;
+		background-color: #fff !important;
+		width: 137px;
+		height: 199px;
+		padding: 0 10px;
+		display: none;
+	}
+	.dl:hover .m-loginops{display: block}
+	.m-topbar .inner .m-loginops b{
+		width: 14px;
+		height: 7px;
+		background: url(pic/logo3.png) no-repeat -286px -326px;
+		position: absolute;
+		top:-7px;
+		left: 73px;
+	}
+	.m-topbar .inner .m-loginops li{width: 137px;height: 39px;line-height: 39px;border-bottom: #cdcdcd dotted 1px;}
+	.m-topbar .inner .m-loginops a{display: block;}
+	.m-topbar .inner .m-loginops .tiny-logo{display: block;width: 20px;height: 20px;float: left;margin:12px 0 0 4px;}
+	.m-topbar .inner .m-loginops .wy .tiny-logo{background: url(pic/logo3.png) no-repeat -192px -304px;}
+	.m-topbar .inner .m-loginops .xl .tiny-logo{background: url(pic/logo3.png) no-repeat -192px -324px;}
+	.m-topbar .inner .m-loginops .tx .tiny-logo{background: url(pic/logo3.png) no-repeat -192px -344px;}
+	.m-topbar .inner .m-loginops .sj .tiny-logo{background: url(pic/logo3.png) no-repeat -192px -365px;}
+	.m-topbar .inner .m-loginops .wx .tiny-logo{background: url(pic/logo3.png) no-repeat -192px -424px;}
+	.m-topbar .inner .m-loginops span{width: 20px;height: 20px;font-size: 12px;line-height: 35px;}
+	.m-headertop .inner{margin: 0 auto;width: 980px;height: 76px;margin-top: 40px;}
+	.m-headertop .m-logo{width: 194px;height: 36px;float: left}
+	.m-headertop .m-sch{width: 400px;height: 36px;margin-left: 88px;float: left}
+	.m-headertop .m-clouds{float: right}
+	.m-headertop .m-logo a{width: 194px;height: 36px;background: url(pic/logo.png)}
+	.m-headertop .m-sch input{
+		color: #868686;
+		font-size: 14px;
+		line-height: 24px;
+		width: 21pc;
+		height: 14px;
+		border: 1px solid #c9483c;
+		float: left;
+		padding: 10px;
+	}
+	.m-headertop .m-sch button{width: 42px;height: 36px; background: url(pic/logo.png) -2px -56px;}
+	.m-headertop .m-clouds div{width: 99px;height: 34px;float: left;border: 1px solid #ebe6e1;}
+	.m-headertop .m-clouds a{
+		display: block;
+		width: 66px;
+		height: 34px;
+		color:#655;
+		line-height: 34px;
+		font-size: 14px;
+		padding-left: 33px;
+	}
+	.m-headerbottom .inner{margin: 0 auto;width: 980px;height: 36px;border-bottom: 2px solid #665656;}
+	.m-headerbottom li{float: left}
+	.m-headerbottom a{
+		color: #665656;
+		display: block;
+		padding: 0 20px;
+		font-size: 16px;
+		font-weight: bold;
+		height: 36px;
+		line-height: 36px;
+	}
+	.m-headerbottom .fr{float: right;margin-left: 25px;}
+	.m-headerbottom .fr a{
+		padding:0 0 0 22px;
+	}
+	.g-bdw .inner{width: 980px;margin: 0 auto;margin-top:17px;}
+	.a .J_MM{
+		float: left;
+		width: 236px;
+		height: 375px;
+		border: #e0dcd7 solid 1px;
+		border-bottom: none;
+	}
+	.a .category{
+		width: 236px;
+		height: 93px;
+		border-bottom: #e0dcd7 solid 1px;
+		position: relative;
+		z-index:100;
+		background: rgba(255,255,255,1.00)
+	}
+	.a .category h1{
+		display: block;
+		height: 20px;
+		line-height: 20px;
+		font-size: 16px;
+		padding: 12px 20px 2px 20px;
+		position: relative;
+	}
+	.a .category h1 i{
+		width: 4px;
+		height: 9px;
+		background: url(pic/logo2.png) no-repeat 0 -174px;
+		position: absolute;
+		top: 15px;
+    	right: 21px;
+	}
+	.a .category .c{margin: 0 7px;}
+	.a .category p{margin-left: 20px;}
+	.a .category span,.a .category span a{color:#999;font-size: 12px}
+	.a .category .more{
+		z-index: 1;
+		width: 236px;
+		height: 93px;
+		position: absolute;
+		top: -1px;
+		right: -236px;
+		display: none;
+		border: #e0dcd7 solid 1px;
+		border-left: none;
+		background: rgba(255,255,255,1.00)
+		}
+	.a .J_Slider01{height: 375px;overflow: hidden;float: right;}
+	.b{margin-top: 40px;}
+	.b .header li{float: left}
+	.b .contents{width: 978px;height: 200px; border: #e0dcd7 solid 1px;border-left: none;}
+	.b .contents>div{border-left: #e0dcd7 solid 1px;float: left;height: 100%}
+	.neirong img{float: left;}
+	.neirong h1{font-size: 16px;color: #4c4c4c;font-weight: bold;}
+	.neirong h2{font-size: 12px;color: #888;margin: 6px 0 5px;}
+	.neirong h3{font-size: 12px;color: #888;margin: 6px 0 5px;}
+	.c{margin-top: 40px;}
+	.c .left{width: 700px;float: left}
+	.c .left .header h1{float: left;font-size: 18px;color: #000;line-height: 18px;}
+	.c .left .header h2{float: right;font-size: 13px;color: #888;line-height: 30px}
+	.c .left .contents{width: 699px;height: 402px;border-left: #e0dcd7 solid 1px;border-top: #e0dcd7 solid 1px}
+	.c .left .contents li{
+		float: left;
+		display: block;
+		width: 348px;
+		height: 201px;
+		border-bottom: #e0dcd7 solid 1px;
+		border-right: #e0dcd7 solid 1px
+	}
+	.c .right{float: right;width: 260px;height: 439px;}
+	.c .right .header h1{font-size: 18px;line-height: 18px;color: #000;height: 30px}
+	.c .right .J_ManBang{width: 258px;height: 401px;border: #e0dcd7 solid 1px}
+	.c .right .J_ManBang .fold,.c .right .J_ManBang .unfold{border-bottom: #e0dcd7 solid 1px}
+	.c .right .J_ManBang .fold{width: 222px;height: 42px;padding: 0 14px 0 22px;}
+	.c .right .J_ManBang .fold a{
+		display: block;
+		color: #655;
+		font-size: 14px;
+		height: 42px;
+		line-height: 42px;
+	}
+	.c .right .J_ManBang .fold span{margin-right: 16px;color: #aaa;}
+	.c .right .J_ManBang .unfold{width: 224px;height: 116px;padding: 20px 14px 8px 20px;display: none}
+	.c .right .J_ManBang .unfold>div{float: left}
+	.c .right .J_ManBang .unfold .num{color: #c9483c;}
+	.c .right .J_ManBang .unfold .img{margin: 0 15px;}
+	.c .right .J_ManBang .unfold img{width:75px;height: 105px}
+	.c .right .J_ManBang .unfold .content a{font-weight: bold;font-size: 16px;line-height: 22px;color: #4c4c4c;}
+	.c .right .J_ManBang .unfold .content p{color: #888;margin-top: 5px;font-size: 12px;}
+	.c .right .J_ManBang .more{height: 41px;border-bottom: #e0dcd7 solid 1px;}
+	.c .right .J_ManBang .more a{display: block;height: 41px;line-height: 41px;font-size: 14px;color: #655;margin-left: 25px;}
+	.c .right .J_ManBang .more:hover a{color: #c9483c;}
+	.d{margin-top: 40px;}
+	.d .header  h1{float: left;font-size: 18px;color: #000;line-height: 18px;}
+	.d .header  h2{float: right;font-size: 13px;color: #888;line-height: 30px}
+	.d .m-article{width: 980px;height: 364px;border: #e0dcd7 solid 1px;border-bottom:none;border-right:none}
+	.d .m-article li{
+		display: block;
+		float: left;
+		width: 326px;
+		height: 72px;
+		border-bottom: #e0dcd7 solid 1px;
+		border-right:  #e0dcd7 solid 1px;
+	}
+	.d .m-article .bigli{width: 285px;height: 324px;padding: 20px}
+	.d .m-article .bigli h1{font-size: 16px;color: #4c4c4c;font-weight: bold;margin: 12px 0 3px;}
+	.d .m-article .bigli h2{font-size: 12px;color: #888;line-height: 18px;}
+	.d .m-article .bigli h3{font-size: 12px;color: #888;line-height: 18px;height: 54px;margin: 6px 0 10px;}
+	.d .m-article .bigli .zan{display: inline-block;width: 12px;height: 12px; background: url(pic/logo2.png) no-repeat 0 -10px;}
+	.d .m-article .bigli .zan-num{font-size: 12px; line-height: 18px;color: #888;}
+	.d .m-article .bigli .zhuan{
+		display: inline-block;
+		width: 14px;height: 12px;
+		background: url(pic/logo2.png) no-repeat -15px -10px;
+		margin-left: 10px;
+	}
+	.d .m-article .bigli .zhuan-num{font-size: 12px; line-height: 18px;color: #888;}
+	.d .m-article .smallli a{font-size: 14px;color: #655;display: block;}
+	.d .m-article .smallli h1{width: 290px; height: 14px;padding: 13px 10px 6px 26px;position: relative}
+	.d .m-article .smallli h2{width: 290px;height: 14px;padding: 4px 20px 16px 26px; font-size: 14px;color: #888;}
+	.d .m-article .smallli h1 i{
+		position: absolute;
+		width: 2px;
+		height: 10px;
+		left: 19px;
+		top: 19px;
+		background: url(pic/logo2.png) no-repeat -40px -10px;
+	}
+	.e{margin-top: 40px}
+	.e .header{height: 30px;}
+	.e .header p{font-size: 18px;color: #000;line-height: 18px;}
+	.e .content{width: 979px;height: 200px; border-top: #e0dcd7 solid 1px;border-left: #e0dcd7 solid 1px;}
+	.e .content li{
+		position: relative;
+		width:156px;
+		height: 175px;
+		padding: 16px 20px 6px 67px;
+		border-right:#e0dcd7 solid 1px;
+		border-bottom: #e0dcd7 solid 1px;
+		float: left;
+	}
+	.e .content .ys1 b{
+		display: block;
+		width: 36px;
+		height: 36px;
+		background: url(pic/logo2.png) no-repeat 0 -25px;
+		position: absolute;
+		top: 20px;
+		left: 16px;
+	}
+	.e .content .ys2 b{
+		display: block;
+		width: 36px;
+		height: 36px;
+		background: url(pic/logo2.png) no-repeat -36px -25px;
+		position: absolute;
+		top: 20px;
+		left: 16px;
+	}
+	.e .content .ys3 b{
+		display: block;
+		width: 36px;
+		height: 36px;
+		background: url(pic/logo2.png) no-repeat 0 -61px;
+		position: absolute;
+		top: 20px;
+		left: 16px;
+	}
+	.e .content .ys4 b{
+		display: block;
+		width: 36px;
+		height: 36px;
+		background: url(pic/logo2.png) no-repeat -36px -61px;
+		position: absolute;
+		top: 20px;
+		left: 16px;
+	}
+	.e .content h1{font-size: 16px;font-weight: bold;color: #4c4c4c;}
+	.e .content h2{font-size: 12px;color: #655;margin-bottom: 4px;}
+	.e .content h3{font-size: 12px;color: #655;margin-top: 3px;}
+	.e .content h3 a{display: inline-block;width: 19px;height: 16px;margin-left: 5px;}
+	.e .content h3 .wx{background: url(pic/logo2.png) -26px -130px;}
+	.e .content h3 .wx:hover{background: url(pic/logo2.png) -26px -149px;}
+	.e .content h3 .xl{background: url(pic/logo2.png) 0 -130px;}
+	.e .content h3 .xl:hover{background: url(pic/logo2.png) 0 -150px;}
+	.e .content h3 .tx{background: url(pic/logo2.png) -51px -130px;}
+	.e .content h3 .tx:hover{background: url(pic/logo2.png) -51px -149px;line-height: 20px;}
+	.e .content h4 a{
+		display: block;
+		width: 74px;
+		height: 22px;
+		position: absolute;
+		bottom: 20px;
+		border: #c9483c solid 1px;
+		color: #c9483c;
+		border-radius: 5px;
+		line-height: 22px;
+		text-align: center;
+		font-size: 12px;
+	}
+	.footer{margin-top: 80px;background: rgba(250,250,250,1.00)}
+	.footer .m-index-cat{width: 980px;padding: 38px 0 55px;margin: 0 auto;}
+	.footer .m-index-cat li{width: 115px;padding:0 23px;float: left;border-left: #e0dcd7 solid 1px;}
+	.footer .m-index-cat h1{display: block;height: 24px; font-size: 16px;color: #655;}
+	.footer .m-index-cat h2 a{font-size: 12px;color: #999;float: left;line-height: 30px;margin-right: 5px;}
+	.footer .g-ftw{border-top: #e0dcd7 solid 1px;}
+	.footer .g-ft{width: 980px;margin: 0 auto;padding: 40px 0 50px}
+	.footer .g-ft span{text-align: center;}
+	.footer .g-ft h1,.footer .g-ft h2,.footer .g-ft h3{color:#999;font-size: 12px;text-align: center;line-height: 25px;}
+	.footer .g-ft .jg{margin: 0 10px;}
+	.footer .g-ft span{font-size: 12px;}
+	.footer .g-ft span a{font-size: 12px;color: #999;}
+	.footer .g-ft h3 span{font-size: 12px;}
+	.footer .g-ft h3 a{display: inline-block;width: 16px;height: 16px;line-height: 20px;margin-left: 8px;}
+	.footer .g-ft h3 .wx{background: url(pic/logo4.png) no-repeat -17px -39px;}
+	.footer .g-ft h3 .wx:hover{background: url(pic/logo4.png) no-repeat -17px -58px;}
+	.footer .g-ft h3 .yx{background: url(pic/logo4.png) no-repeat -49px -38px;}
+	.footer .g-ft h3 .yx:hover{background: url(pic/logo4.png) no-repeat -49px -58px;}
+	.footer .g-ft h3 .xl{background: url(pic/logo4.png) no-repeat 0 -39px;}
+	.footer .g-ft h3 .xl:hover{background: url(pic/logo4.png) no-repeat 0 -59px;}
+	.footer .g-ft h3 .kj{background: url(pic/logo4.png) no-repeat -33px -39px;}
+	.footer .g-ft h3 .kj:hover{background: url(pic/logo4.png) no-repeat -33px -60px;}
+	.icon-sj{
+		position: fixed;
+		bottom: 154px;
+		right: 104.5px;
+		width: 50px;
+		height: 50px;
+		background: url(pic/logo5.png) no-repeat 0 -100px;
+	}
+	.icon-sj:hover{background: url(pic/logo5.png) no-repeat 0 -150px;}
+	.icon-sj .m-qr-hover{
+		display: block;
+		width: 170px;
+		height: 180px;
+		position: fixed;
+		right: 154.5px;
+		bottom: 154px;
+		background: url(pic/logo5.png) no-repeat -50px 0px;
+		display: none;
+	}
+	.icon-sj:hover.icon-sj .m-qr-hover{display: block}
+	.icon-sj .m-qr-hover:hover{background: url(pic/logo5.png) no-repeat -50px -180px}
+	.icon-sj .m-qr-hover img{
+		position: absolute;
+		top:20px;
+		left: 21px;
+		width: 116px;
+		height: 116px;
+		
+	}
+	.icon-jb{
+		position: fixed;
+		bottom: 92px;
+		right: 104.5px;
+		width: 50px;
+		height: 50px;
+		background: url(pic/logo5.png) no-repeat 0 -200px;
+	}
+	.icon-jb:hover{background: url(pic/logo5.png) no-repeat 0 -250px;}
+	.icon-top{
+		position: fixed;
+		bottom: 30px;
+		right: 104.5px;
+		width: 50px;
+		height: 50px;
+		background: url(pic/logo5.png) no-repeat 0 0;
+	}
+	.icon-top:hover{background: url(pic/logo5.png) no-repeat 0 -50px;}
+	.icon-lb{
+		position: fixed;
+		bottom: 30px;
+		right: 189.500px;
+		width: 80px;
+		height: 78px;
+		background: url( pic/lb.png) no-repeat;
+	}
+	.layer{
+		position: absolute;
+		top:-105px;
+		right: -73px;
+		width: 194px;
+		height: 62px;
+		padding: 14px 18px;
+		border: 1px solid #cdcdcd;
+		background-color: #fff;
+		display: none;
+	}
+	.layer_fuzhu{
+		position: absolute;
+		top:-15px;
+		right: 0px;
+		width: 80px;
+		height: 30px;
+		opacity: 0;
+	}
+	.icon-lb:hover .layer{display: block}
+	.layer p{font-size: 16px;}
+	.layer a{
+		display: block;
+		width: 88px;
+		height: 30px;
+		line-height: 30px;
+		background-color: #ed6460;
+		color:#fff;
+		text-align: center;
+		border-radius: 5px;
+		margin: 0 auto;
+		margin-top: 5px;
+	}
+	.layer b{
+		width: 9pt;
+		height: 7px;
+		background: url(pic/lb-xia.png);
+		position: absolute;
+		left: 110px;
+		bottom: -6px;
+	}
+	.J_HeaderFix{
+		position: fixed;
+		top: -47px;
+		width: 100%;
+		height: 46px;
+		background: #fafafa;
+		z-index: 200;
+		border-bottom: 1px solid #c4c4c4;
+	}
+	.J_HeaderFix .inner{width: 980px;margin: 0 auto;}
+	.J_HeaderFix .inner .logo{
+		display: block;
+		width: 132px;
+		height: 25px;
+		background: url(pic/logo.png) no-repeat 0 -353px;
+		position: absolute;
+		top: 11px;
+	}
+	.J_HeaderFix .inner ul{margin-left: 156px;}
+	.J_HeaderFix .inner ul li{
+		float: left;
+		margin:0 7px;
+	}
+	.J_HeaderFix .inner ul li a{
+		font-size: 14px;
+		color: #999;
+		line-height: 46px;
+	}
+	.J_HeaderFix .inner form{margin-top: 7px;float: right;}
+	.J_HeaderFix .inner form input{
+		width: 173px;
+		height: 12px;
+		border: #c9483c 1px solid;
+		padding: 9px;
+		color: #868686;
+		font-size: 12px;
+		float: left;
+	}
+	.J_HeaderFix .inner form button{
+		width: 42px;
+		height: 32px;
+		background: url(pic/logo.png) no-repeat -1px -398px;
+		float: left;
+	}
+	
+</style>
+
+<script type="text/javascript">
+	var flag = false;
+	$(document).ready(function(){
+		$(document).scroll(function(){
+			if($(this).scrollTop() > $(".m-headertop").offset().top ){
+				$(".icon-top").show();
+			}
+			else{
+				$(".icon-top").hide();
+			}
+			if($(this).scrollTop() > $(".m-headertop").offset().top ){
+				$(".J_HeaderFix").stop(true,false).animate({top:"0"});
+			}
+			else{
+				$(".J_HeaderFix").stop(true,false).animate({top:"-47px"});
+			}
+		});
+
+		//隐藏菜单栏淡入淡出
+		$(".category").mouseenter(function(){
+			$(this).find(".more").fadeIn();
+		});
+		$(".category").mouseleave(function(){
+			$(this).find(".more").fadeOut();
+		});
+		//鼠标悬停，背景变灰
+		$(".bianhui").mouseenter(function(){
+			$(this).css({background:"rgb(244,244,244)"});
+		});
+		$(".bianhui").mouseleave(function(){
+			$(this).css({background:"rgb(255,255,255)"});
+		});
+		//鼠标悬停，文字变红
+		$(".bianhong").mouseenter(function(){
+			$(this).css({color:"#c9483c"});
+		});
+		$(".bianhong").mouseleave(function(){
+			$(this).css({color:"#999"});
+		});
+		$(".J_ManBang ul li").mouseenter(function(){
+			$(this).parent().find(".unfold").css({display:"none"});
+			$(this).parent().find(".fold").css({display:"block"});
+			$(this).find(".unfold").css({display:"block"});
+			$(this).find(".fold").css({display:"none"});
+			
+		});
+		$(".J_ManBang ul li").mouseleave(function(){
+			$(this).parent().find(".unfold").css({display:"none"});
+			$(this).parent().find(".fold").css({display:"block"});
+			$(this).find(".unfold").css({display:"block"});
+			$(this).find(".fold").css({display:"none"});
+		});
+		//回到顶端
+		$(".icon-top").click(function(){
+			$("html,body").animate({scrollTop:$("#top").offset().top},500);
+		});
+		$(".bottom_bianhong").mouseenter(function(){
+			$(this).css({borderBottom:"2px solid #c9483c"})
+		});
+		$(".bottom_bianhong").mouseleave(function(){
+			$(this).css({borderBottom:"none"})
+		});
+	});
+	
+</script>
+</head>
+
+<body>
+	<div class="m-topbar" id="top">
+		<div class="inner">
+			<ul class="ul1">
+				<li><a class="bianhong" href="">网易云阅读</a></li>
+				<li><span>|</span></li>
+				<li><a class="bianhong" href="">国风中文网</a></li>
+				<li><span>|</span></li>
+				<li><a class="bianhong" href="">采薇书院</a></li>
+				<li><span>|</span></li>
+				<li><a class="bianhong" href="">从电脑上导入书籍</a></li>
+				<li><span>|</span></li>
+				<li><a class="bianhong" href="">公众号</a></li>
+			</ul>
+			<div>
+				<ul class="ul2">
+					<li class="dl">
+					<div class="dl_fuzhu"></div>
+					<div class="m-loginops">
+							<b></b>
+							<ul>
+								<li class="wy">
+									<a class="bianhong" href="">
+										<span class="tiny-logo"></span>
+										<span>网易邮箱登陆</span>
+									</a>
+								</li>
+								<li class="xl">
+									<a class="bianhong" href="">
+										<span class="tiny-logo"></span>
+										<span>新浪微博登录</span>
+									</a>
+								</li>
+								<li class="tx">
+									<a class="bianhong" href="">
+										<span class="tiny-logo"></span>
+										<span>腾讯微博登录</span>
+									</a>
+								</li>
+								<li class="sj">
+									<a class="bianhong" href="">
+										<span class="tiny-logo"></span>
+										<span>手机号登录</span>
+									</a>
+								</li>
+								<li class="wx">
+									<a class="bianhong" href="">
+										<span class="tiny-logo"></span>
+										<span>微信登录</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					<a href="" class="bianhong">登录</a>
+					</li>
+					<li><span>|</span></li>
+					<li><a class="bianhong" href="">注册</a></li>
+					<li><span>|</span></li>
+					<li><a class="bianhong" href="">举报</a></li>
+				</ul>
+				
+			</div>
+		</div>
+	</div>
+	<div class="m-headertop">
+		<div class="inner">
+			<div class="m-logo">
+				<a href="" style="display: block;"></a>
+			</div>
+			<div class="m-sch">
+				<input type="text" class="s-placeholder" autocomplete="off" value="罪恶调查局">
+				<button type="submit"></button>
+			</div>
+			<div class="m-clouds">
+				<div class="bianhui"><a href="" style="background: url(pic/logo.png) no-repeat 13px -121px">我的订阅</a></div>
+				<div class="bianhui"><a href="" style="background: url(pic/logo.png) no-repeat 13px -175px;">我的书架</a></div>
+			</div>
+			<div style="clear: both"></div>
+		</div>
+	</div>
+	<div class="m-headerbottom">
+		<div class="inner">
+			<ul>
+				<li><a href="" style="color: #c9483c;border-bottom: 2px solid #c9483c;">首页</a></li>
+				<li><a class="bottom_bianhong" href="">出版图书</a></li>
+				<li><a class="bottom_bianhong" href="">国风中文网</a></li>
+				<li><a class="bottom_bianhong" href="">采薇书院</a></li>
+				<li><a class="bottom_bianhong" href="">漫画</a></li>
+				<li><a class="bottom_bianhong" href="">订阅</a></li>
+				<li><a class="bottom_bianhong" href="">排行榜</a></li>
+				<li class="fr"><a class="bottom_bianhong" href="" style="background:url(pic/3.png) no-repeat 0 10px;">客户端</a></li>
+				<li class="fr"><a class="bottom_bianhong" href="" style="background:url(pic/2.png) no-repeat 0 10px;">充值</a></li>
+				<li class="fr"><a class="bottom_bianhong" href="" style="background:url(pic/1.png) no-repeat 0 10px;">作者中心</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--	主题内容-->
+	<div class="g-bdw">
+		<div class="inner">
+			<div class="a">
+				<div class="J_MM">
+					<div class="category">
+						<div class="sub">
+							<h1>国风中文网<i style="display: block;"></i></h1>
+							<p>
+								<span><a class="bianhong" href="">都市生活</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">官场职场</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">玄幻仙侠</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">悬疑探险</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">灵异恐怖</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">短篇小说</a></span>
+							</p>
+						</div>
+						<div class="more">
+							<p style="margin-top: 35px;">
+								<span><a class="bianhong" href="">科幻奇幻</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">军事谍战</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">同人网游</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">历史传奇</a></span>	
+							</p>
+						</div>
+					</div>
+					<div class="category">
+						<div class="sub">
+							<h1>国风中文网<i style="display: block;"></i></h1>
+							<p>
+								<span><a class="bianhong" href="">都市生活</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">官场职场</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">玄幻仙侠</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">悬疑探险</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">灵异恐怖</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">短篇小说</a></span>
+							</p>
+						</div>
+						<div class="more">
+							<p style="margin-top: 35px;">
+								<span><a class="bianhong" href="">科幻奇幻</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">军事谍战</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">同人网游</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">历史传奇</a></span>	
+							</p>
+						</div>
+					</div>
+					<div class="category">
+						<div class="sub">
+							<h1>国风中文网<i style="display: block;"></i></h1>
+							<p>
+								<span><a class="bianhong" href="">都市生活</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">官场职场</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">玄幻仙侠</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">悬疑探险</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">灵异恐怖</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">短篇小说</a></span>
+							</p>
+						</div>
+						<div class="more">
+							<p style="margin-top: 35px;">
+								<span><a class="bianhong" href="">科幻奇幻</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">军事谍战</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">同人网游</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">历史传奇</a></span>	
+							</p>
+						</div>
+					</div>
+					<div class="category">
+						<div class="sub">
+							<h1>国风中文网<i style="display: block;"></i></h1>
+							<p>
+								<span><a class="bianhong" href="">都市生活</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">官场职场</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">玄幻仙侠</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">悬疑探险</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">灵异恐怖</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">短篇小说</a></span>
+							</p>
+						</div>
+						<div class="more">
+							<p style="margin-top: 35px;">
+								<span><a class="bianhong" href="">科幻奇幻</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">军事谍战</a></span>
+								<span class="c">|</span>
+								<span><a class="bianhong" href="">同人网游</a></span>
+							</p>
+							<p>
+								<span><a class="bianhong" href="">历史传奇</a></span>	
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="J_Slider01">
+					<img src="pic/201707211136511235a.jpg">
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div class="b">
+				<div class="header">
+					<ul>
+						<li style="font-size: 18px;line-height: 18px;margin-right: 20px;">主编推荐</li>
+						<li><a href="" style="font-size: 14px;color: rgba(78,78,78,1.00)">小说</a></li>
+						<li><span style="font-size: 3px;margin: 0 10px">|</span></li>
+						<li><a href="" style="font-size: 14px;color: rgba(78,78,78,1.00)">图书</a></li>
+						<li><span style="font-size: 3px;margin: 0 10px;">|</span></li>
+						<li><a href="" style="font-size: 14px;color: rgba(78,78,78,1.00)">订阅</a></li>
+					</ul>
+					<div style="clear: both"></div>
+				</div>
+				<div class="contents" style="margin-top: 20px;">
+					<div class="bianhui" style="width: 325px">
+						<div class="neirong" style="padding: 20px;">
+							<img src="pic/a1.jpg">
+							<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+								<h1>罪恶调查局</h1>
+								<h2>骁骑校</h2>
+								<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+								<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+								<div style="clear: both"></div>
+							</div>
+						</div>
+					</div>
+					<div class="bianhui" style="width: 325px">
+						<div class="neirong" style="padding: 20px;">
+							<img src="pic/a1.jpg">
+							<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+								<h1>罪恶调查局</h1>
+								<h2>骁骑校</h2>
+								<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+								<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+								<div style="clear: both"></div>
+							</div>
+						</div>
+					</div>
+					<div class="bianhui" style="width: 325px">
+						<div class="neirong" style="padding: 20px;">
+							<img src="pic/a1.jpg">
+							<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+								<h1>罪恶调查局</h1>
+								<h2>骁骑校</h2>
+								<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+								<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+								<div style="clear: both"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div class="c">
+				<div class="left">
+					<div class="header">
+						<h1>国风中文网</h1>
+						<h2>更多></h2>
+						<div style="clear: both"></div>
+					</div>
+					<div class="contents">
+						<ul>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="right">
+					<div class="header"><h1>国风中文网畅销榜</h1></div>
+					<div class="J_ManBang">
+						<ul>
+							<li>
+								<div class="fold" style="display: none">
+									<a href="">
+										<span>01</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui" style="display: block">
+									<div class="num">01</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>02</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">02</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>03</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">03</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>04</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">04</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>05</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">05</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>06</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">06</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="more bianhui"><a href="">→ 查看更多</a></div>
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div class="c">
+				<div class="left">
+					<div class="header">
+						<h1>国风中文网</h1>
+						<h2>更多></h2>
+						<div style="clear: both"></div>
+					</div>
+					<div class="contents">
+						<ul>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="right">
+					<div class="header"><h1>国风中文网畅销榜</h1></div>
+					<div class="J_ManBang">
+						<ul>
+							<li>
+								<div class="fold" style="display: none">
+									<a href="">
+										<span>01</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui" style="display: block">
+									<div class="num">01</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>02</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">02</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>03</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">03</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>04</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">04</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>05</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">05</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>06</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">06</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="more bianhui"><a href="">→ 查看更多</a></div>
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div class="c">
+				<div class="left">
+					<div class="header">
+						<h1>国风中文网</h1>
+						<h2>更多></h2>
+						<div style="clear: both"></div>
+					</div>
+					<div class="contents">
+						<ul>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="right">
+					<div class="header"><h1>国风中文网畅销榜</h1></div>
+					<div class="J_ManBang">
+						<ul>
+							<li>
+								<div class="fold" style="display: none">
+									<a href="">
+										<span>01</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui" style="display: block">
+									<div class="num">01</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>02</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">02</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>03</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">03</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>04</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">04</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>05</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">05</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>06</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">06</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="more bianhui"><a href="">→ 查看更多</a></div>
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div class="c">
+				<div class="left">
+					<div class="header">
+						<h1>国风中文网</h1>
+						<h2>更多></h2>
+						<div style="clear: both"></div>
+					</div>
+					<div class="contents">
+						<ul>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+							<li class="bianhui">
+								<div class="neirong" style="padding: 20px;">
+									<img src="pic/a1.jpg">
+									<div style="float: left; width: 150px;height: 160px; margin-left: 20px;position: relative">
+										<h1>罪恶调查局</h1>
+										<h2>骁骑校</h2>
+										<h3>毛头小子，混血少女，混吃等死的老记者，这就是罪恶调查局的全部。</h3>
+										<a href="" style="position: absolute;bottom: 2px;color: rgba(67,67,67,1.00)">立即阅读></a>
+										<div style="clear: both"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="right">
+					<div class="header"><h1>国风中文网畅销榜</h1></div>
+					<div class="J_ManBang">
+						<ul>
+							<li>
+								<div class="fold" style="display: none">
+									<a href="">
+										<span>01</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui" style="display: block">
+									<div class="num">01</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>02</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">02</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>03</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">03</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>04</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">04</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>05</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">05</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="fold">
+									<a href="">
+										<span>06</span>官梯
+									</a>
+								</div>
+								<div class="unfold bianhui">
+									<div class="num">06</div>
+									<div class="img"><img src="pic/官梯.jpg"></div>
+									<div class="content">
+										<a href="">官梯</a>
+										<p>钓人的鱼</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="more bianhui"><a href="">→ 查看更多</a></div>
+					</div>
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div class="d">
+				<div class="header">
+					<h1>热门文章</h1>
+					<h2>更多></h2>
+					<div style="clear: both"></div>
+				</div>
+				<div class="m-article">
+					<ul>
+						<li class="bigli bianhui">
+							<a href="">
+								<img src="pic/article_1.jpg">
+								<h1>张悦然：旧时的离别</h1>
+								<h2>来源：美文日赏</h2>
+								<h3>那座老火车站适时地死去，变成记忆中的文物。</h3>
+								<h4>
+									<b class="zan"></b>
+									<span class="zan-num">444</span>
+									<b class="zhuan"></b>
+									<span class="zhuan-num">332</span>
+								</h4>
+							</a>
+						</li>
+						<li class="bigli bianhui">
+							<a href="">
+								<img src="pic/article_2.jpg">
+								<h1>听爷爷的话</h1>
+								<h2>来源：人间</h2>
+								<h3>他还是一样喜欢絮叨，一个人能自顾自地说上半天。</h3>
+								<h4>
+									<b class="zan"></b>
+									<span class="zan-num">576</span>
+									<b class="zhuan"></b>
+									<span class="zhuan-num">377</span>
+								</h4>
+							</a>
+						</li>
+						<li class="smallli bianhui">
+							<h1><i></i><a class="bianhong" href="">自白</a></h1>
+							<h2>我愿意把这人生的短梦做得生意盎然。</h2>
+						</li>
+						<li class="smallli bianhui">
+							<h1><i></i><a class="bianhong" href="">所有艰难的时刻，都只属于你一个人</a></h1>
+							<h2>与其想着拉着全世界下水，不如一个人扑腾挣扎。</h2>
+						</li>
+						<li class="smallli bianhui">
+							<h1><i></i><a class="bianhong" href="">写给女儿：自我保全是你的终生必修课</a></h1>
+							<h2>一位母亲给女儿的一封信。</h2>
+						</li>
+						<li class="smallli bianhui">
+							<h1><i></i><a class="bianhong" href="">我好像在哪里见过你</a></h1>
+							<h2>一个人能有多不正经，就能有多深情。</h2>
+						</li>
+						<li class="smallli bianhui">
+							<h1><i></i><a class="bianhong" href="">遇见鲷鱼冰淇淋</a></h1>
+							<h2>好闺蜜，干一杯，不胖我不归。</h2>
+						</li>
+					</ul>
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div class="e">
+				<div class="header">
+					<p>关于云阅读</p>
+				</div>
+				<div class="content">
+					<ul>
+						<li class="ys1 bianhui">
+							<b class="icon"></b>
+							<h1>网易云阅读</h1>
+							<h2>最受欢迎的阅读产品</h2>
+							<h3>关注我们:
+								<a class="wx" href=""></a>
+								<a class="xl" href=""></a>
+								<a class="tx" href=""></a>
+							</h3>
+							<h4>
+								<a href="">+ 关注</a>
+							</h4>
+						</li>
+						<li class="ys2 bianhui">
+							<b class="icon"></b>
+							<h1>作者中心</h1>
+							<h2>原创、自媒体、内容商、漫画</h2>
+							<h3>招募作者，福利优厚</h3>
+							<h4>
+								<a href="">投稿></a>
+							</h4>
+						</li>
+						<li class="ys3 bianhui">
+							<b class="icon"></b>
+							<h1>客服中心</h1>
+							<h2>欢迎反馈宝贵意见给我们</h2>
+							<h3>
+								客服：0571-89853801<br>
+								邮件：reader@188.com<br>
+								QQ：2978661285<br>
+								微信号：Reader163<br>
+							</h3>
+							<h4>
+								<a href="">意见反馈></a>
+							</h4>
+						</li>
+						<li class="ys4 bianhui" style="width: 159px">
+							<b class="icon"></b>
+							<h1>商务合作</h1>
+							<h2>欢迎来电洽谈相关合作</h2>
+							<h3>
+								广告：0571-89853126<br>
+								资讯：15757831061<br>
+								图书：0571-89852025<br>
+								内容：reader@188.com<br>
+								合作微信：xiaomi1426858<br>
+							</h3>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--	页脚内容-->
+	<div class="footer">
+		<div class="m-index-cat">
+			<ul>
+				<li style="border: none">
+					<h1>出版图书</h1>
+					<h2>
+						<a class="bianhong" href="">小说作品</a>
+						<a class="bianhong" href="">人文社科</a>
+						<a class="bianhong" href="">成功励志</a>
+						<a class="bianhong" href="">经济管理</a>
+						<a class="bianhong" href="">品质生活</a>
+						<a class="bianhong" href="">计算机</a>
+						<a class="bianhong" href="">文学作品</a>
+						<a class="bianhong" href="">更多>></a>
+					</h2>
+				</li>
+				<li>
+					<h1>出版图书</h1>
+					<h2>
+						<a class="bianhong" href="">小说作品</a>
+						<a class="bianhong" href="">人文社科</a>
+						<a class="bianhong" href="">成功励志</a>
+						<a class="bianhong" href="">经济管理</a>
+						<a class="bianhong" href="">品质生活</a>
+						<a class="bianhong" href="">计算机</a>
+						<a class="bianhong" href="">文学作品</a>
+						<a class="bianhong" href="">更多>></a>
+					</h2>
+				</li>
+				<li>
+					<h1>出版图书</h1>
+					<h2>
+						<a class="bianhong" href="">小说作品</a>
+						<a class="bianhong" href="">人文社科</a>
+						<a class="bianhong" href="">成功励志</a>
+						<a class="bianhong" href="">经济管理</a>
+						<a class="bianhong" href="">品质生活</a>
+						<a class="bianhong" href="">计算机</a>
+						<a class="bianhong" href="">文学作品</a>
+						<a class="bianhong" href="">更多>></a>
+					</h2>
+				</li>
+				<li>
+					<h1>出版图书</h1>
+					<h2>
+						<a class="bianhong" href="">小说作品</a>
+						<a class="bianhong" href="">人文社科</a>
+						<a class="bianhong" href="">成功励志</a>
+						<a class="bianhong" href="">经济管理</a>
+						<a class="bianhong" href="">品质生活</a>
+						<a class="bianhong" href="">计算机</a>
+						<a class="bianhong" href="">文学作品</a>
+						<a class="bianhong" href="">更多>></a>
+					</h2>
+				</li>
+				<li>
+					<h1>出版图书</h1>
+					<h2>
+						<a class="bianhong" href="">小说作品</a>
+						<a class="bianhong" href="">人文社科</a>
+						<a class="bianhong" href="">成功励志</a>
+						<a class="bianhong" href="">经济管理</a>
+						<a class="bianhong" href="">品质生活</a>
+						<a class="bianhong" href="">计算机</a>
+						<a class="bianhong" href="">文学作品</a>
+						<a class="bianhong" href="">更多>></a>
+					</h2>
+				</li>
+				<li>
+					<h1>出版图书</h1>
+					<h2>
+						<a class="bianhong" href="">小说作品</a>
+						<a class="bianhong" href="">人文社科</a>
+						<a class="bianhong" href="">成功励志</a>
+						<a class="bianhong" href="">经济管理</a>
+						<a class="bianhong" href="">品质生活</a>
+						<a class="bianhong" href="">计算机</a>
+						<a class="bianhong" href="">文学作品</a>
+						<a class="bianhong" href="">更多>></a>
+					</h2>
+				</li>
+				<div style="clear: both"></div>
+			</ul>
+		</div>
+		<div class="g-ftw">
+			<div class="g-ft">
+				<h1>
+					<span><a class="bianhong" href="">网易首页</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href="">公司简介</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href="">客户服务</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href="">相关法律</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href=""> 网站导航</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href="">意见反馈</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href="">客服电话</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href="">帮助中心</a></span>
+					<span class="jg">|</span>
+					<span><a class="bianhong" href="">作者中心</a></span>
+				</h1>
+				<h2>网易公司版权所有©1997-2017</h2>
+				<h3>
+					<span>分享到：</span>
+					<a class="wx" href=""></a>
+					<a class="yx" href=""></a>
+					<a class="xl" href=""></a>
+					<a class="kj" href=""></a>
+				</h3>
+			</div>
+		</div>
+	</div>
+	<!--	全局内容-->
+		<div class="icon-sj">
+			<a class="m-qr-hover">
+				<img src="pic/QR_All.png">
+			</a>
+		</div>
+		<div class="icon-jb"></div>
+		<div class="icon-top"></div>
+		<div class="icon-lb">
+			<div class="layer_fuzhu"></div>
+			<div class="layer">
+				<p><sapn>送</sapn><span style="color: #ed6460;">500</span><span>阅点，请你免费看书</span></p>
+				<a>立即领取</a>
+				<b></b>
+			</div>
+		</div>
+		<div class="J_HeaderFix">
+			<div class="inner">
+				<a href="" class="logo"></a>
+				<ul>
+					<li><a href="" style="color: #c9483c;">首页</a></li>
+					<li><a class="bianhong" href="">出版图书</a></li>
+					<li><a class="bianhong" href="">国风中文网</a></li>
+					<li><a class="bianhong" href="">采薇书院</a></li>
+					<li><a class="bianhong" href="">漫画</a></li>
+					<li><a class="bianhong" href="">订阅</a></li>
+					<li><a class="bianhong" href="">排行榜</a></li>
+					<li><a class="bianhong" href="">客户端下载</a></li>
+				</ul>
+				<form>
+					<input type="text" value="北京，北京">
+					<button type="submit"></button>
+				</form>
+				<div style="clear: both"></div>
+			</div>
+		</div>
+	
+</body>
+</html>
